@@ -31,6 +31,7 @@ else:
 
 for i in timer:
     print(i)
+
     
     
 def pull_timer(second):
@@ -66,6 +67,8 @@ set_num = {x for x in range(10)}
 print(dict_num)
 print(set_num)
 
+
+
 def log_stream(log_1, log_2):
     yield from log_1
     yield from log_2
@@ -83,6 +86,8 @@ pipeline = extract_errors(stream)
 for line in pipeline:
     print(line)
     
+
+#Распаковка списков разной степени вложенности
 nested = [1, [2, [3, 4]], 5]
 def flatten(item):
     for elm in item:
@@ -94,6 +99,7 @@ num = flatten(nested)
 print([i for i in num])
 
 
+#Удаление чисел из списка с использованием генератора
 def spit(lst):
     yield from lst
 
@@ -106,3 +112,38 @@ nums = [2, 4, 5, 8]
 sp = spit(nums)
 numbers = remove(sp)
 print(list(numbers))
+
+
+#Удаление чисел из списка с использование включений (Comprehensions)
+nums = [2, 4, 5, 8]
+print([x for x in nums if x % 2 != 0])
+
+
+#Вывод последовательности фибоначи до указанного числа
+def fib(end):
+    a = 0
+    b = 1
+    while a <= end:
+        yield a
+        a, b = b, a + b
+        
+dsas = fib(5)
+for i in dsas:
+    print(i)
+    
+
+#Пример на чтение файла, важное уточнение: использовать конструкция with open
+def check(file_path, keyword):
+    for line in file_path:
+        clean_line = line.strip()
+        if clean_line.startswith(keyword):
+            yield line
+
+file = ["ERROR: asdaasd sadasd"]
+check_file = check(file, "ERROR")
+for i in check_file:
+    print(i)
+
+
+
+    
