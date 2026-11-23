@@ -1,6 +1,7 @@
 import time
 import threading
 import multiprocessing
+import asyncio
 
 def countdown(start):
     s = start
@@ -77,17 +78,33 @@ def countdown(start):
 #     obj.join()
 # print(gob)
 
-if __name__ == "__main__":
-    p_1 = multiprocessing.Process(target=countdown, args=(50_000_000,))
-    p_2 = multiprocessing.Process(target=countdown, args=(50_000_000,))
-    ps = [p_1, p_2]
-    st = time.perf_counter()
-    for obj in ps:
-        obj.start()
-    for obj in ps:
-        obj.join()
+# if __name__ == "__main__":
+#     p_1 = multiprocessing.Process(target=countdown, args=(50_000_000,))
+#     p_2 = multiprocessing.Process(target=countdown, args=(50_000_000,))
+#     ps = [p_1, p_2]
+#     st = time.perf_counter()
+#     for obj in ps:
+#         obj.start()
+#     for obj in ps:
+#         obj.join()
     
-    print(f"Процессы отработали за {(time.perf_counter() - st):.9f} сек")
+#     print(f"Процессы отработали за {(time.perf_counter() - st):.9f} сек")
+
+async def async_query():
+    await asyncio.sleep(1)
+async def main():
+    start = time.perf_counter()
+    await asyncio.gather(async_query(), async_query(), async_query(), async_query())
+    print(f"Время выполнения {(time.perf_counter() - start):.3f} сек")
+async def main_1():
+    start = time.perf_counter()
+    await async_query()
+    await async_query()
+    await async_query()
+    await async_query()
+    print(f"Время выполнения {(time.perf_counter() - start):.3f} сек")
+if __name__ == "__main__":
+    asyncio.run(main())
 
         
         
