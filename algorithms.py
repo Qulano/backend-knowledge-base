@@ -55,3 +55,54 @@ def binary_search(lst, target):
             right = average - 1
     return f"Элемент не найден, потратили шагов {step_count}"
 print(binary_search(ls, 24))
+
+def is_palindrome(s):
+    left = 0
+    right = len(s) - 1
+    while left < right:
+        if not s[left].isalnum():
+            left += 1
+            continue
+        elif not s[right].isalnum():
+            right -= 1
+            continue
+        elif s[left].lower() == s[right].lower():
+                left += 1
+                right -= 1
+        else:
+            return False
+    return True
+print(is_palindrome(",,,"))
+
+def is_valid_brackets(g):
+    brs = {
+        ")": "(",
+        "}": "{",
+        "]": "["
+    }
+    sk = []
+    for i in g:
+        if i not in brs:
+            sk.append(i)
+        else:
+            if not sk:
+                return False
+            else:
+                if sk.pop() != brs[i]:
+                    return False
+    return not sk
+print(is_valid_brackets("[]]"))
+
+def sum_nested(nested):
+    total = 0
+    for element in nested:
+        if isinstance(element, list):
+            total += sum_nested(element)
+        else:
+            total += element
+    return total
+print(sum_nested([1, [2, 3], [4, [5, 6]]]))
+             
+    
+
+        
