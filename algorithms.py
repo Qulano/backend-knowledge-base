@@ -102,7 +102,21 @@ def sum_nested(nested):
             total += element
     return total
 print(sum_nested([1, [2, 3], [4, [5, 6]]]))
-             
+
+def bfs(tree, start):
+    queue = deque([start])
+    result = []
+    while queue:
+        current = queue.popleft()
+        result.append(current)
+        queue.extend(tree.get(current, []))
+    return result
+frends = {
+    "Ты": ["Аня", "Боря"],
+    "Аня": ["Ваня", "Галя"],
+    "Боря": ["Дима"]
+}
+print(bfs(frends, "Ты"))
     
 
         
